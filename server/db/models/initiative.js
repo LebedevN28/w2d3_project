@@ -9,10 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Initiative.init({
-    tittle: DataTypes.STRING,
+    title: DataTypes.STRING,
     description: DataTypes.TEXT,
     imagesUrl: DataTypes.TEXT,
     count: DataTypes.INTEGER,
+    discount: DataTypes.INTEGER,
     levelPriority: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {
