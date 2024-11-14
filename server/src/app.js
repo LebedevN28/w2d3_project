@@ -15,6 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/account/', accountRouter);
 app.use('/api/tokens/', tokensRouter);
-app.use('/api/initiative/', initiativeRouter)
+app.use('/api/initiatives', initiativeRouter)
 
 module.exports = app;
