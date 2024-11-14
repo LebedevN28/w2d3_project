@@ -1,4 +1,3 @@
-'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,11 +10,11 @@ module.exports = {
       },
       lastName: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       firstName: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       fatherName: {
         type: Sequelize.STRING
@@ -23,25 +22,25 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false,
+        // allowNull: false,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       registration: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       createdAt: {
-        allowNull: false,
+        // allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW")
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
-        allowNull: false,
+        // allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW")
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },

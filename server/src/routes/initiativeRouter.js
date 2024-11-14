@@ -15,9 +15,9 @@ initiativeRouter
     }
 })
 .post(verifyAccessToken, async (req, res) => {
-    const { title, description, imagesUrl, count, levelPriority } = req.body;
+    const { title, description, imagesUrl, count, discount, levelPriority } = req.body;
     try {
-       const newInit = await Initiative.create({ title, description, imagesUrl, count, levelPriority });
+       const newInit = await Initiative.create({ title, description, imagesUrl, count, discount, levelPriority });
        res.status(201).json(newInit)
     } catch (error) { 
         res.status(500).send(error)
@@ -37,7 +37,7 @@ initiativeRouter
 })
 
 initiativeRouter
-.route('/:userId')
+.route('/userCards/:userId')
 .get(async (req, res) => {
     const { userId } = req.params;
     try {
