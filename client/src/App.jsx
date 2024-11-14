@@ -5,17 +5,17 @@ import MainPage from './components/pages/MainPage';
 import CardPage from './components/pages/CardPage';
 import AccountLoginPage from './components/pages/AccountLoginPage';
 import AccountNewPage from './components/pages/AccountNewPage';
+import AllCardOneUser from './components/pages/AllCardOneUser';
 import useUser from './hooks/useUser';
 import AddCard from './components/ui/AddCard';
 // import AddCardPage from './components/pages/AddCardPage';
 
 function App() {
   const { logoutHandler, signInHandler, signUpHandler, user } = useUser();
-console.log(user.status);
+  console.log(user.status);
 
   const router = createBrowserRouter([
     {
-     
       element: <Layout user={user} logoutHandler={logoutHandler} />,
       errorElement: <h1>No content</h1>,
       children: [
@@ -46,8 +46,12 @@ console.log(user.status);
           ],
         },
         {
-          path: '/initiatives/:initiativeId',
+          path: `/initiatives/:initiativeId`,
           element: <CardPage />,
+        },
+        {
+          path: '/initiatives/user/:userId',
+          element: <AllCardOneUser />,
         },
       ],
     },
