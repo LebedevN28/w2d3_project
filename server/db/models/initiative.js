@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   Initiative.init({
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    imagesUrl: DataTypes.STRING,
+    imagesUrl: DataTypes.TEXT,
     count: DataTypes.INTEGER,
     discount: DataTypes.INTEGER,
     levelPriority: DataTypes.STRING,

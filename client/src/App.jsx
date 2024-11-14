@@ -12,7 +12,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout user={user} logoutHandler={logoutHandler}  />,
+      element: <Layout user={user} logoutHandler={logoutHandler} />,
+      errorElement: <h1>No content</h1>,
       children: [
         {
           path: '/',
