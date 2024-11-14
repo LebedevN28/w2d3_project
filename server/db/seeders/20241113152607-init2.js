@@ -1,5 +1,3 @@
-'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -17,7 +15,8 @@ module.exports = {
         },
         {
           title: 'разрушили детскую площадку',
-          description: 'какие-то хуликаны уничтожили детскую площадку, подожгли качели',
+          description:
+            'какие-то хуликаны уничтожили детскую площадку, подожгли качели',
           imagesUrl: 'server/img/img_ploshadka.jpg',
           count: 1,
           discount: 100,

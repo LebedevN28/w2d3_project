@@ -14,10 +14,9 @@ export default function AddCard() {
       const newDataFromForm = new FormData(dataFromForm);
       const dataForApi = Object.fromEntries(newDataFromForm);
       if (
-        !dataForApi.tittle ||
+        !dataForApi.title ||
         !dataForApi.description ||
-        !dataForApi.imagesUrl ||
-        !dataForApi.levelPriority
+        !dataForApi.imagesUrl
       ) {
         alert('Не все поля заполнены');
         return;
@@ -25,14 +24,13 @@ export default function AddCard() {
       console.log(dataForApi);
 
       const dataFile = new FormData();
-      dataFile.append('tittle', dataForApi.tittle);
+      dataFile.append('title', dataForApi.title);
       dataFile.append('description', dataForApi.description);
       dataFile.append('imagesUrl', dataForApi.imagesUrl);
-      dataFile.append('levelPriority', dataForApi.levelPriority);
       console.log(dataFile);
 
       await axiosInstance.post('/initiatives', dataFile);
-      navigate('/initiatives');
+      navigate('/');
       event.target.reset(); // очистка формы
     } catch (error) {
       console.log(error);
@@ -42,7 +40,7 @@ export default function AddCard() {
     <Container className="d-flex justify-content-center align-items-center mt-5">
       <Form onSubmit={addHandler} className="d-flex flex-column">
         <Form.Control
-          name="tittle"
+          name="title"
           type="text"
           placeholder="Название"
           className="mb-3"
@@ -59,12 +57,7 @@ export default function AddCard() {
           placeholder="Загрузите изображение"
           className="mb-3"
         />
-        <Form.Control
-          name="levelPriority"
-          type="text"
-          placeholder="Название"
-          className="mb-3"
-        />
+      
         <Button type="submit" variant="light" className="mb-3 center ">
           <Icon.Save />
         </Button>
