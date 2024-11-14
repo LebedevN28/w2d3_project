@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProtectedRouter from './components/hoc/ProtectedRoute';
 import Layout from './components/Layout';
 import MainPage from './components/pages/MainPage';
+import CardPage from './components/pages/CardPage';
 import AccountLoginPage from './components/pages/AccountLoginPage';
 import AccountNewPage from './components/pages/AccountNewPage';
 import useUser from './hooks/useUser';
@@ -31,6 +32,10 @@ function App() {
               element: <AccountLoginPage signInHandler={signInHandler} />,
             },
           ],
+        },
+        {
+          path: '/initiatives/:initiativeId',
+          element: <CardPage />,
         },
       ],
     },

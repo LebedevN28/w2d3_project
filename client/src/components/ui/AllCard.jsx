@@ -19,35 +19,32 @@ export default function CardCard({ card, user, deleteHandler, updateHandler }) {
           margin: '10px',
         }}
       >
-        <Card.Img variant="top" src={card.imagesUrl} />
+        <Card.Img
+          variant="top"
+          src={`http://localhost:3000/${card.imagesUrl}`}
+        />
         <Card.Body>
-          <Card.Title>{card.tittle}</Card.Title>
-          <Card.Text>Author: {card?.User?.id}</Card.Text>
+          <Card.Title>{card.title}</Card.Title>
+          <Link to={`/initiatives/user/${card.userId}`}>
+            <Card.Text>Автор: {card?.User?.id}</Card.Text>
+          </Link>
           {
             <ButtonGroup size="sm">
-              {user.status === 'logged' && user.data.id === card.userId && (
+              {user?.status === 'logged' && user?.data.id === card.userId && (
                 <>
-                  <Button
-                    onClick={() => setShow((prev) => !prev)}
-                    variant="light"
-                  >
-                    {show ? <Icon.X /> : <Icon.Pencil />}
-                  </Button>
                   <Button
                     onClick={() => deleteHandler(card.id)}
                     variant="light"
                   >
                     <Icon.Trash />
                   </Button>
-             
                 </>
               )}
-
-              <Button variant="light">
-                <Link to={`/onecard/${card.id}`}>
+              <Link to={`/initiatives/${card.id}`}>
+                <Button variant="light">
                   <Icon.ArrowRight />
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </ButtonGroup>
           }
           {show && <CardUpdateForm card={card} updateHandler={updateHandler} />}
