@@ -36,19 +36,17 @@ initiativeRouter
     }
 })
 
-initiativeRouter
-.route('/:userId')
-.get(async (req, res) => {
-    const { userId } = req.params;
-    try {
-        const initiativeOfUser = await Initiative.findAll({
-            where: { userId }
-        })
-        res.status(200).json(initiativeOfUser)
-    } catch (error) {
-        res.status(500).send(error)
-    }
-})
+initiativeRouter.route('/usercards/:userId').get(async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const initiativeOfUser = await Initiative.findAll({
+      where: { userId },
+    });
+    res.status(200).json(initiativeOfUser);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 
 module.exports = initiativeRouter;
