@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(
       return axiosInstance(prevRequest);
     }
     return Promise.reject(err);
-  },
+  }
 );
 
 export default axiosInstance;
