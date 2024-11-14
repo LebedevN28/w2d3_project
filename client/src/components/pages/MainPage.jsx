@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
-import { Container, Row } from 'react-bootstrap';
-import CardCard from '../ui/CardCard';
+import { Button, Container, Row } from 'react-bootstrap';
+import AllCard from '../ui/AllCard';
 
 export default function MainPage({ user }) {
   const [cards, setcards] = useState([]);
@@ -31,7 +31,7 @@ export default function MainPage({ user }) {
   };
   const updateHandler = async (id) => {
     try {
-      const res = await axiosInstance.put(`/initiatives/${id}`);
+      const res = await axiosInstance.put(`/initiative/${id}`);
       if (res.status === 200) {
         setcards((prev) => prev.filter((el) => el.id !== id));
       }
@@ -46,7 +46,7 @@ export default function MainPage({ user }) {
       <Container className="d-flex justify-content-center mt-5">
         <Row className="mt-3">
           {cards.map((card) => (
-            <CardCard
+            <AllCard
               key={card.id}
               card={card}
               deleteHandler={deleteHandler}
