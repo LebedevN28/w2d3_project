@@ -29,7 +29,7 @@ export default function useUser() {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
 
-    if (!formData.email || !formData.password || !formData.name) {
+    if (!formData.email || !formData.password || !formData.firstName) {
       return alert('Заполните все поля!');
     }
     axiosInstance

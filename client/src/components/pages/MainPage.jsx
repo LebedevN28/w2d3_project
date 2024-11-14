@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { Button, Container, Row } from 'react-bootstrap';
+import CardCard from '../ui/CardCard';
 
 export default function MainPage({ user }) {
   const [cards, setcards] = useState([]);
@@ -8,7 +9,7 @@ export default function MainPage({ user }) {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const res = await axiosInstance.get('/api/cards');
+        const res = await axiosInstance.get('/initiatives');
         setcards(res.data);
       } catch (error) {
         console.log(error);
@@ -19,7 +20,7 @@ export default function MainPage({ user }) {
 
   const deleteHandler = async (id) => {
     try {
-      const res = await axiosInstance.delete(`/api/cards/${id}`);
+      const res = await axiosInstance.delete(`/initiatives/${id}`);
       if (res.status === 200) {
         setcards((prev) => prev.filter((el) => el.id !== id));
       }
@@ -30,7 +31,7 @@ export default function MainPage({ user }) {
   };
   const updateHandler = async (id) => {
     try {
-      const res = await axiosInstance.put(`/api/cards/${id}`);
+      const res = await axiosInstance.put(`/initiatives/${id}`);
       if (res.status === 200) {
         setcards((prev) => prev.filter((el) => el.id !== id));
       }

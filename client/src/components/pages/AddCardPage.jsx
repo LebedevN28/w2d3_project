@@ -1,14 +1,30 @@
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import useUser from '../../hooks/useUser';
+import { useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { Form } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
 
-export default function AccountNewPage() {
-  
-  const { signUpHandler } = useUser();
+
+export default function AddCardPage() {
+const [addCard, setAddCard] = useState([])
+
+    const signUpHandler = (e) => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(e.target));
+    
+        if (!formData.tittle || !formData.description || !formData.imagesUrl || !formData.levelPriority ) {
+          return alert('Заполните все поля!');
+        }
+        axiosInstance
+          .post('/account/register', formData)
+          .then(({ data }) => {
+            setAddCard({ status: 'logged', data: data.user });
+          })
+          .catch((error) => {
+            alert(error.response.data.message);
+          });
+      };
   return (
-    <Row>
+<Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">
         <h3 className="text-center">Регистрация</h3>
         <Form onSubmit={signUpHandler}>
@@ -71,5 +87,5 @@ export default function AccountNewPage() {
         </Form>
       </Col>
     </Row>
-  );
+  )
 }

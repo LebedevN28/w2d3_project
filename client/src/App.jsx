@@ -5,13 +5,16 @@ import MainPage from './components/pages/MainPage';
 import AccountLoginPage from './components/pages/AccountLoginPage';
 import AccountNewPage from './components/pages/AccountNewPage';
 import useUser from './hooks/useUser';
+import AddCard from './components/ui/AddCard';
+// import AddCardPage from './components/pages/AddCardPage';
 
 function App() {
   const { logoutHandler, signInHandler, signUpHandler, user } = useUser();
+console.log(user.status);
 
   const router = createBrowserRouter([
     {
-      path: '/',
+     
       element: <Layout user={user} logoutHandler={logoutHandler} />,
       errorElement: <h1>No content</h1>,
       children: [
@@ -29,6 +32,15 @@ function App() {
             {
               path: '/account/login',
               element: <AccountLoginPage signInHandler={signInHandler} />,
+            },
+          ],
+        },
+        {
+          element: <ProtectedRouter isAllowed={user.status === 'logged'} />,
+          children: [
+            {
+              path: '/newiniative',
+              element: <AddCard />,
             },
           ],
         },
