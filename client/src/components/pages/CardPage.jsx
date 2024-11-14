@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import CraftCard from "../ui/CraftCard";
 import Container from "react-bootstrap/esm/Container";
-import axios from "axios";
 import axiosInstance from "../../api/axiosInstance";
 export default function CraftPage({user}) {
   const [currentCraft, setCurrentCraft] = useState([]);
