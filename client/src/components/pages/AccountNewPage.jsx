@@ -28,10 +28,10 @@ export default function AccountNewPage() {
               placeholder="Введите фамилия"
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="fartherName">
+          <Form.Group className="mb-3" controlId="fatherName">
             <Form.Label>Отчество</Form.Label>
             <Form.Control
-              name="fartherName"
+              name="fatherName"
               type="text"
               placeholder="Введите Отчество"
             />
