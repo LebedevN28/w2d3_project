@@ -9,25 +9,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tittle: {
+      title: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       description: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
       },
       imagesUrl: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       count: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0
+      },
+      discount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
       levelPriority: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -41,12 +47,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
+        defaultValue: Sequelize.fn("NOW")
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("NOW"),
+        defaultValue: Sequelize.fn("NOW")
       }
     });
   },

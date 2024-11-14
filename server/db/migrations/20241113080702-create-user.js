@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      fartherName: {
+      fatherName: {
         type: Sequelize.STRING
       },
       email: {
