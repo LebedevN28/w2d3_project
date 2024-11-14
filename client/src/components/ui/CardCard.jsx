@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import * as Icon from 'react-bootstrap-icons';
 import CardUpdateForm from './CardUpdateForm';
 import { Link } from 'react-router-dom';
-export default function CardCard({ card }) {
+export default function CardCard({ card, user }) {
   const [show, setShow] = useState(false);
   return (
     <Col className="d-flex justify-content-center">

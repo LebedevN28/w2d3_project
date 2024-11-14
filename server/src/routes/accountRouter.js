@@ -14,7 +14,7 @@ accountRouter.post('/register', async (req, res) => {
 
   const [newUser, created] = await User.findOrCreate({
     where: { email },
-    defaults: { firstName, lastName, fatherName, registration, password: await bcrypt.hash(password, 10) },
+    defaults: { fitstName, lastName, fatherName, registration, password: await bcrypt.hash(password, 10) },
   });
 
   if (!created) {
