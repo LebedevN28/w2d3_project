@@ -5,36 +5,41 @@ const verifyAccessToken = require('../middlewares/verifyAccessToken');
 const initiativeRouter = express.Router();
 
 initiativeRouter
-.route('/')
-.get(async (req, res) => {
+  .route('/')
+  .get(async (req, res) => {
     try {
-        const initiatives = await Initiative.findAll();
-        res.status(200).json(initiatives)
+      const initiatives = await Initiative.findAll();
+      res.status(200).json(initiatives);
     } catch (error) {
-        res.status(500).send(error)
+      res.status(500).send(error);
     }
-})
-.post(verifyAccessToken, async (req, res) => {
-    const { title, description, imagesUrl, count, levelPriority } = req.body;
+  })
+  .post(verifyAccessToken, async (req, res) => {
+    const { title, description, imagesUrl } = req.body;
     try {
-       const newInit = await Initiative.create({ title, description, imagesUrl, count, levelPriority });
-       res.status(201).json(newInit)
-    } catch (error) { 
-        res.status(500).send(error)
+      const newInit = await Initiative.create({
+        title,
+        description,
+        imagesUrl,
+        levelPriority: res.locals.user.registration,
+        userId: res.locals.user.id,
+      });
+      res.status(201).json(newInit);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
     }
-})
+  });
 
-initiativeRouter
-.route('/:initiativeId')
-.get(async (req, res) => {
-    const { initiativeId } = req.params;
-    try {
-        const initiativeById = await Initiative.findByPk(initiativeId);
-        res.status(200).json(initiativeById)
-    } catch (error) {
-        res.status(500).send(error)
-    }
-})
+initiativeRouter.route('/:initiativeId').get(async (req, res) => {
+  const { initiativeId } = req.params;
+  try {
+    const initiativeById = await Initiative.findByPk(initiativeId);
+    res.status(200).json(initiativeById);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 initiativeRouter.route('/usercards/:userId').get(async (req, res) => {
   const { userId } = req.params;

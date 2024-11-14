@@ -1,5 +1,3 @@
-'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,7 +7,7 @@ module.exports = {
         {
           title: 'течет крыша',
           description: 'крыша течет очень сильно',
-          imagesUrl: 'server/img/img_krisha.jpg',
+          imagesUrl: 'server/public/img/img_krisha.jpg',
           count: 10,
           discount: 3,
           levelPriority: 'Федеральный',
@@ -18,7 +16,7 @@ module.exports = {
         {
           title: 'разрушили детскую площадку',
           description: 'какие-то хуликаны уничтожили детскую площадку, подожгли качели',
-          imagesUrl: 'server/img/img_ploshadka.jpg',
+          imagesUrl: 'server/public/img/img_ploshadka.jpg',
           count: 1,
           discount: 100,
           levelPriority: 'Региональный',

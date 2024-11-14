@@ -5,7 +5,6 @@ const accountRouter = require('./routes/accountRouter');
 const tokensRouter = require('./routes/tokensRouter');
 const initiativeRouter = require('./routes/initiativeRouter');
 
-
 const app = express();
 
 app.use(cookieParser());
