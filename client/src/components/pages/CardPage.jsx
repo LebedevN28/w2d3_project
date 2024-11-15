@@ -6,32 +6,32 @@ import axiosInstance from '../api/axiosInstance';
 import { useParams } from 'react-router-dom';
 
 export default function CardPage({ user }) {
-  const { id } = useParams();
+  const { initiativeId } = useParams();
   const [currentCard, setCurrentCard] = useState({});
 
   useEffect(() => {
     const fetchCard = async () => {
       try {
-        const res = await axiosInstance.get(`/initiatives/${id}`);
+        const res = await axiosInstance.get(`/initiatives/${initiativeId}`);
         setCurrentCard(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchCard();
-  }, [id]);
+  }, [initiativeId]);
 
-  // const deleteHandler = async (id) => {
-  //   try {
-  //     const res = await axiosInstance.delete(`/initiatives/${id}`);
-  //     if (res.status === 200) {
-  //       setCurrentCraft((prev) => prev.filter((el) => el.id !== id));
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     alert('Что-то пошло не так');
-  //   }
-  // };
+  const deleteHandler = async (id) => {
+    try {
+      const res = await axiosInstance.delete(`/initiatives/${id}`);
+      if (res.status === 200) {
+        setCurrentCraft((prev) => prev.filter((el) => el.id !== id));
+      }
+    } catch (error) {
+      console.log(error);
+      alert('Что-то пошло не так');
+    }
+  };
 
   // const updateHandler = async (event, craftId) => {
   //   try {
@@ -68,7 +68,7 @@ export default function CardPage({ user }) {
             card={currentCard}
             user={user}
             // updateHandler={updateHandler}
-            // deleteHandler={deleteHandler}
+            deleteHandler={deleteHandler}
           />
         </Row>
       </Container>

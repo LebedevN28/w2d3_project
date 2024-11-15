@@ -17,8 +17,8 @@ initiativeRouter
       res.status(500).send(error);
     }
   })
-  .post(verifyAccessToken, upload.single('file'), async (req, res) => {
-    const { title, description, imagesUrl } = req.body;
+  .post(verifyAccessToken,upload.single('file'), async (req, res) => {
+    const { title, description } = req.body;
     try {
       if (!req.file) {
         return res.status(400).json({ message: 'Файл не загружен' });
