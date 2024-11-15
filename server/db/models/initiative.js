@@ -6,20 +6,18 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(User, { foreignKey: 'userId' });
     }
   }
-  Initiative.init(
-    {
-      title: DataTypes.STRING,
-      description: DataTypes.TEXT,
-      imagesUrl: DataTypes.STRING,
-      count: DataTypes.INTEGER,
-      discount: DataTypes.INTEGER,
-      levelPriority: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: 'Initiative',
-    }
-  );
+  Initiative.init({
+    title: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    imagesUrl: DataTypes.TEXT,
+    count: DataTypes.INTEGER,
+    discount: DataTypes.INTEGER,
+    levelPriority: DataTypes.STRING,
+    deadline: DataTypes.DATE,
+    userId: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Initiative',
+  });
   return Initiative;
 };
