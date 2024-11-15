@@ -42,7 +42,7 @@ initiativeRouter
         imagesUrl: name,
         levelPriority: res.locals.user.registration,
         userId: res.locals.user.id,
-        deadline: futureDate
+        deadline: futureDate,
       });
 
       res.status(201).json(newInit);
@@ -119,20 +119,27 @@ initiativeRouter
     }
   });
 
-  initiativeRouter
-  .route('/:initiativeId/voteFor')
-  .put(verifyAccessToken, async (req, res) => {
+initiativeRouter
+  // Обработчик для голосования "за"
+  .put('/:initiativeId/voteFor', verifyAccessToken, async (req, res) => {
     const { initiativeId } = req.params;
     const vote = await Initiative.findByPk(initiativeId);
+    if (!vote) return res.status(404).json({ message: 'Initiative not found' });
+
+    // Обновляем количество голосов
     await vote.update({ count: vote.count + 1 });
     await vote.save();
     res.json(vote);
   })
-  .route('/:initiativeId/voteAnti')
-  .put(verifyAccessToken, async (req, res) => {
+
+  // Обработчик для голосования "против"
+  .put('/:initiativeId/voteAnti', verifyAccessToken, async (req, res) => {
     const { initiativeId } = req.params;
     const vote = await Initiative.findByPk(initiativeId);
-    await vote.update({ count: vote.discount + 1 });
+    if (!vote) return res.status(404).json({ message: 'Initiative not found' });
+
+    // Обновляем количество голосов (или другое поле, если нужно)
+    await vote.update({ count: vote.count - 1 });
     await vote.save();
     res.json(vote);
   });
