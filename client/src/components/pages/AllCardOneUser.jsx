@@ -2,36 +2,27 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { Button, Container, Row } from 'react-bootstrap';
 import AllCard from '../ui/AllCard';
+import { useParams } from 'react-router-dom';
 
-export default function MainPage({ user }) {
+export default function AllCardOneUser({ user }) {
   const [cards, setcards] = useState([]);
+  const { userId } = useParams();
 
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const res = await axiosInstance.get('/initiatives');
+        const res = await axiosInstance.get(`/initiatives/usercards/${userId}`);
         setcards(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchCards();
-  }, []);
+  }, [userId]);
 
   const deleteHandler = async (id) => {
     try {
       const res = await axiosInstance.delete(`/initiatives/${id}`);
-      if (res.status === 200) {
-        setcards((prev) => prev.filter((el) => el.id !== id));
-      }
-    } catch (error) {
-      console.log(error);
-      alert('Что-то пошло не так');
-    }
-  };
-  const updateHandler = async (id) => {
-    try {
-      const res = await axiosInstance.put(`/initiative/${id}`);
       if (res.status === 200) {
         setcards((prev) => prev.filter((el) => el.id !== id));
       }
@@ -50,7 +41,6 @@ export default function MainPage({ user }) {
               key={card.id}
               card={card}
               deleteHandler={deleteHandler}
-              updateHandler={updateHandler}
               user={user}
             />
           ))}
