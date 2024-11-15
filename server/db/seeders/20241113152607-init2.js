@@ -11,6 +11,7 @@ module.exports = {
           count: 97,
           discount: 3,
           levelPriority: 'Муниципальный',
+          deadline: '2015-01-08',
           userId: 1,
         },
         {
@@ -20,6 +21,7 @@ module.exports = {
           count: 60,
           discount: 40,
           levelPriority: 'Региональный',
+          deadline: '2019-07-11',
           userId: 2,
         },
         {
@@ -29,6 +31,7 @@ module.exports = {
           count: 80,
           discount: 20,
           levelPriority: 'Федеральный',
+          deadline: '2022-03-29',
           userId: 3,
         },
         {
@@ -38,6 +41,7 @@ module.exports = {
           count: 91,
           discount: 9,
           levelPriority: 'Муниципальный',
+          deadline: '2015-01-08',
           userId: 1,
         },
         {
@@ -47,6 +51,7 @@ module.exports = {
           count: 75,
           discount: 25,
           levelPriority: 'Федеральный',
+          deadline: '2019-07-11',
           userId: 2,
         },
         {
@@ -56,6 +61,7 @@ module.exports = {
           count: 10,
           discount: 90,
           levelPriority: 'Федеральный',
+          deadline: '2022-03-29',
           userId: 3,
         },
         {
@@ -65,6 +71,7 @@ module.exports = {
           count: 15,
           discount: 85,
           levelPriority: 'Региональный',
+          deadline: '2015-01-08',
           userId: 1,
         },
         {
@@ -74,6 +81,7 @@ module.exports = {
           count: 3,
           discount: 97,
           levelPriority: 'Региональный',
+          deadline: '2019-07-11',
           userId: 2,
         },
         {
@@ -83,6 +91,7 @@ module.exports = {
           count: 12,
           discount: 88,
           levelPriority: 'Федеральный',
+          deadline: '2022-03-29',
           userId: 3,
         },
         {
@@ -92,6 +101,7 @@ module.exports = {
           count: 6,
           discount: 94,
           levelPriority: 'Федеральный',
+          deadline: '2015-01-08',
           userId: 1,
         },
       ],
