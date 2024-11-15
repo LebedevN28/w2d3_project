@@ -1,6 +1,9 @@
 const express = require('express');
 const { Initiative } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
+const upload = require('../middlewares/multer');
+const fs = require('fs/promises');
+const sharp = require('sharp');
 
 const initiativeRouter = express.Router();
 
@@ -14,13 +17,19 @@ initiativeRouter
       res.status(500).send(error);
     }
   })
-  .post(verifyAccessToken, async (req, res) => {
+  .post(verifyAccessToken, upload.single('file'), async (req, res) => {
     const { title, description, imagesUrl } = req.body;
     try {
+      if (!req.file) {
+        return res.status(400).json({ message: 'Файл не загружен' });
+      }
+      const name = `${Date.now()}.webp`;
+      const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
+      await fs.writeFile(`./public/img/${name}`, outputBuffer);
       const newInit = await Initiative.create({
         title,
         description,
-        imagesUrl,
+        imagesUrl: name,
         levelPriority: res.locals.user.registration,
         userId: res.locals.user.id,
       });
@@ -41,17 +50,29 @@ initiativeRouter.route('/:initiativeId').get(async (req, res) => {
   }
 });
 
-initiativeRouter.route('/usercards/:userId').get(async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const initiativeOfUser = await Initiative.findAll({
-      where: { userId },
-    });
-    res.status(200).json(initiativeOfUser);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
+initiativeRouter
+  .route('/userCards/:userId')
+  .get(async (req, res) => {
+    const { userId } = req.params;
+    try {
+      const initiativeOfUser = await Initiative.findAll({
+        where: { userId },
+      });
+      res.status(200).json(initiativeOfUser);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  })
+  .delete(async (req, res) => {
+    const { userId } = req.params;
+    try {
+      await Initiative.destroy({
+        where: { userId },
+      });
+      res.sendStatus(204);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
 
 module.exports = initiativeRouter;
