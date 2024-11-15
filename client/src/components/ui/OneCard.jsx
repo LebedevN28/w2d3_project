@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'; // Для отправки запросов на сервер
 
 export default function OneCard({ card, user, deleteHandler }) {
-  useEffect(() => {
-    // Логируем состояние пользователя для диагностики
-    console.log('User state:', user);
-  }, [user]);
+  // useEffect(() => {
+  //   // Логируем состояние пользователя для диагностики
+  //   console.log('User state:', user);
+  // }, [user]);
+
+  console.log('OneCard', { user, card });
 
   const handleVoteFor = async () => {
     try {
@@ -105,6 +107,9 @@ export default function OneCard({ card, user, deleteHandler }) {
               <Button onClick={handleVoteAnti} variant="danger">
                 Голосовать "Против"
               </Button>
+              <Card.Text style={{ fontSize: '0.95rem', color: '#555' }}>
+               {(card.count/(card.count + card.discount)) * 100} % Проголосовали "За"
+              </Card.Text>
             </>
           ) : (
             <p>Пожалуйста, войдите, чтобы проголосовать.</p>

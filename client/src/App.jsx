@@ -8,6 +8,7 @@ import AccountNewPage from './components/pages/AccountNewPage';
 import AllCardOneUser from './components/pages/AllCardOneUser';
 import useUser from './hooks/useUser';
 import AddCard from './components/ui/AddCard';
+import ErrorPage from './components/pages/ErrorPage';
 // import AddCardPage from './components/pages/AddCardPage';
 
 function App() {
@@ -47,11 +48,15 @@ function App() {
         },
         {
           path: `/initiatives/:initiativeId`,
-          element: <CardPage />,
+          element: <CardPage user={user} />,
         },
         {
           path: '/initiatives/user/:userId',
           element: <AllCardOneUser />,
+        },
+        {
+          path: '*',
+          element: <ErrorPage />,
         },
       ],
     },

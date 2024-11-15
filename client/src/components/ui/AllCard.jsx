@@ -7,8 +7,9 @@ import CardUpdateForm from './CardUpdateForm';
 import { Pencil, Trash, ArrowRight } from 'react-bootstrap-icons';
 import * as Icon from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-export default function CardCard({ card, user, deleteHandler, updateHandler }) {
+export default function AllCard({ card, user, deleteHandler, updateHandler }) {
   const [show, setShow] = useState(false);
+  console.log('AllCard',{ user, card });
   return (
     <Col className="d-flex justify-content-center">
       <Card
@@ -32,7 +33,7 @@ export default function CardCard({ card, user, deleteHandler, updateHandler }) {
         <Card.Body>
           <Card.Title>{card.title}</Card.Title>
           <Link to={`/initiatives/user/${card.userId}`}>
-            <Card.Text>Автор: {card?.User?.id}</Card.Text>
+            <Card.Text>Автор: {card?.User?.firstName + ' ' + card?.User?.lastName}</Card.Text>
           </Link>
           {
             <ButtonGroup size="sm">
