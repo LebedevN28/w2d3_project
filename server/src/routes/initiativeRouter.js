@@ -62,6 +62,7 @@ initiativeRouter
     } catch (error) {
       res.status(500).send(error);
     }
+  });
 
 initiativeRouter
 .route('/userCards/:userId')
