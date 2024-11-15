@@ -25,7 +25,7 @@ export default function CardPage({ user }) {
     try {
       const res = await axiosInstance.delete(`/initiatives/${id}`);
       if (res.status === 200) {
-        setCurrentCraft((prev) => prev.filter((el) => el.id !== id));
+        setCurrentCard((prev) => prev.filter((el) => el.id !== id));
       }
     } catch (error) {
       console.log(error);
