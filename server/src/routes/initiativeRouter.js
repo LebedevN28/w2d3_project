@@ -62,8 +62,13 @@ initiativeRouter
     } catch (error) {
       res.status(500).send(error);
     }
+
+initiativeRouter
+.route('/userCards/:userId')
+.get(async (req, res) => {
   })
   .delete(async (req, res) => {
+
     const { userId } = req.params;
     try {
       await Initiative.destroy({

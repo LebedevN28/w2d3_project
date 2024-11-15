@@ -26,6 +26,16 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          firstName: 'Elnora',
+          lastName: 'Ward',
+          fatherName: 'Enoch',
+          email: 'elnora@example.com',
+          password: bcrypt.hashSync('123', 10),
+          registration: 'Муниципальный',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
