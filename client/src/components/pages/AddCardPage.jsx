@@ -1,30 +1,37 @@
-import { useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { Form } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance";
-
+import { useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
+import { Form } from 'react-router-dom';
+import axiosInstance from '../api/axiosInstance';
 
 export default function AddCardPage() {
-const [addCard, setAddCard] = useState([])
+  const [addCard, setAddCard] = useState([]);
 
-    const signUpHandler = (e) => {
-        e.preventDefault();
-        const formData = Object.fromEntries(new FormData(e.target));
-    
-        if (!formData.tittle || !formData.description || !formData.imagesUrl) {
-          return alert('Заполните все поля!');
-        }
-        axiosInstance
-          .post('/account/register', formData)
-          .then(({ data }) => {
-            setAddCard({ status: 'logged', data: data.user });
-          })
-          .catch((error) => {
-            alert(error.response.data.message);
-          });
-      };
+  const signUpHandler = async (e) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.target));
+
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.registration
+    ) {
+      return alert('Заполните все поля!');
+    }
+
+    try {
+      const { data } = await axiosInstance.post('/account/register', formData);
+      setAddCard({ status: 'logged', data: data.user });
+      alert('Регистрация успешна!');
+    } catch (error) {
+      console.error('Ошибка при регистрации:', error);
+      alert(error.response?.data?.message || 'Произошла ошибка регистрации.');
+    }
+  };
+
   return (
-<Row>
+    <Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">
         <h3 className="text-center">Регистрация</h3>
         <Form onSubmit={signUpHandler}>
@@ -41,7 +48,7 @@ const [addCard, setAddCard] = useState([])
             <Form.Control
               name="lastName"
               type="text"
-              placeholder="Введите фамилия"
+              placeholder="Введите фамилию"
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="fartherName">
@@ -49,7 +56,7 @@ const [addCard, setAddCard] = useState([])
             <Form.Control
               name="fartherName"
               type="text"
-              placeholder="Введите Отчество"
+              placeholder="Введите отчество"
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="registration">
@@ -59,7 +66,7 @@ const [addCard, setAddCard] = useState([])
               name="registration"
               type="text"
             >
-              <option>Выберите регистрацию</option>
+              <option value="">Выберите регистрацию</option>
               <option value="Федеральный">Федеральный</option>
               <option value="Муниципальный">Муниципальный</option>
               <option value="Региональный">Региональный</option>
@@ -87,5 +94,5 @@ const [addCard, setAddCard] = useState([])
         </Form>
       </Col>
     </Row>
-  )
+  );
 }
