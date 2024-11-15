@@ -13,10 +13,9 @@ export default function NavBar({ user, logoutHandler }) {
           <NavLink to="/" className="nav-link">
             Главная
           </NavLink>
-          
         </Nav>
         <Nav>
-          {!user.data && (
+          {user.status !== 'logged' && (
             <>
               <NavLink to="/account/login" className="nav-link">
                 Войти
@@ -24,22 +23,22 @@ export default function NavBar({ user, logoutHandler }) {
               <NavLink to="/account/new" className="nav-link">
                 Регистрация
               </NavLink>
-              <span className="nav-link">|</span>
+              <span className="nav-link">| 
+                {user.status === 'logged' ? user.data.name : ' Гость'}
+              </span>
+              <span className="nav-link"> </span>
             </>
           )}
 
-          <span className="nav-link">
-            {user.data ? user.data.name : 'Гость'}
-          </span>
           {user.data && (
             <span className="nav-link" style={{ display: 'flex' }}>
               <Nav className="me-auto">
-              <NavLink
-            to={`/initiatives/user/${user.data.id}`}
-            className="nav-link"
-          >
-            Мои инициативы
-          </NavLink>
+                <NavLink
+                  to={`/initiatives/user/${user.data.id}`}
+                  className="nav-link"
+                >
+                  Мои инициативы
+                </NavLink>
                 <NavLink to="/newiniative" className="nav-link">
                   Предложить инициативу
                 </NavLink>

@@ -18,7 +18,7 @@ module.exports = {
       },
       imagesUrl: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       count: {
         type: Sequelize.INTEGER,

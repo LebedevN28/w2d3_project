@@ -1,4 +1,7 @@
 const express = require('express');
+
+const app = express();
+
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const accountRouter = require('./routes/accountRouter'); 
@@ -12,9 +15,13 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cookieParser());
 
 app.use('/api/account/', accountRouter);
 app.use('/api/tokens/', tokensRouter);
+app.use('/api/initiatives', initiativeRouter);
 app.use('/api/initiatives', initiativeRouter);
 
 module.exports = app;

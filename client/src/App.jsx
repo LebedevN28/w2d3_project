@@ -19,16 +19,13 @@ function App() {
       element: <Layout user={user} logoutHandler={logoutHandler} />,
       errorElement: <h1>No content</h1>,
       children: [
-        {
-          path: '/',
-          element: <MainPage user={user} />,
-        },
-        {
-          element: <ProtectedRouter isAllowed={user.status !== 'logged'} />,
+    
+        { 
+          element: <ProtectedRouter isAllowed={user.status !== 'logged'}  />,
           children: [
             {
               path: '/account/new',
-              element: <AccountNewPage signUpHandler={signUpHandler} />,
+              element: <AccountNewPage signUpHandler={signUpHandler} user={user} />,
             },
             {
               path: '/account/login',
@@ -37,7 +34,7 @@ function App() {
           ],
         },
         {
-          element: <ProtectedRouter isAllowed={user.status === 'logged'} />,
+          element: <ProtectedRouter isAllowed={user.status === 'logged'}  />,
           children: [
             {
               path: '/newiniative',
@@ -52,6 +49,10 @@ function App() {
         {
           path: '/initiatives/user/:userId',
           element: <AllCardOneUser />,
+        },
+        {
+          path: '/',
+          element: <MainPage user={user} />,
         },
       ],
     },

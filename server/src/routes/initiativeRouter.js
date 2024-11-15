@@ -1,9 +1,9 @@
-const express = require('express');
+const initiativeRouter = require('express').Router();
+const fs = require('fs/promises');
+const sharp = require('sharp');
 const { Initiative } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 const upload = require('../middlewares/multer');
-const fs = require('fs/promises');
-const sharp = require('sharp');
 
 const initiativeRouter = express.Router();
 
@@ -44,7 +44,6 @@ initiativeRouter
         userId: res.locals.user.id,
         deadline: futureDate
       });
-
       res.status(201).json(newInit);
     } catch (error) {
       console.error('Ошибка создания инициативы:', error);

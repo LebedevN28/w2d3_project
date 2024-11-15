@@ -4,7 +4,7 @@ import * as Icon from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import axiosInstance from '../api/axiosInstance';
-import axios from 'axios';
+
 
 export default function AddCard() {
   const navigate = useNavigate();
@@ -14,32 +14,26 @@ export default function AddCard() {
     console.log('Форма отправлена'); // Лог для проверки
 
     try {
-      const formData = new FormData(event.target);
-
-      // Извлекаем данные из формы
-      const title = formData.get('title');
-      const description = formData.get('description');
-      const imageFile = formData.get('file'); // Изменено с imagesUrl на file
-
-      console.log('Поля формы:', { title, description, imageFile }); // Проверка полей
-
-      // Проверка на заполнение всех полей
-      if (!title || !description || !imageFile) {
+      const dataFromForm = event.target;
+      const newDataFromForm = new FormData(dataFromForm);
+      const dataForApi = Object.fromEntries(newDataFromForm);
+      if (
+        !dataForApi.title ||
+        !dataForApi.description ||
+        !dataForApi.imagesUrl
+      ) {
         alert('Не все поля заполнены');
         return;
       }
+      console.log(dataForApi);
 
-      // Отправляем данные на сервер
-      const dataForApi = new FormData();
-      dataForApi.append('title', title);
-      dataForApi.append('description', description);
-      dataForApi.append('file', imageFile); // Поле `file` должно совпадать с ожиданием сервера
+      const dataFile = new FormData();
+      dataFile.append('title', dataForApi.title);
+      dataFile.append('description', dataForApi.description);
+      dataFile.append('imagesUrl', dataForApi.imagesUrl);
+      console.log(dataFile);
 
-      console.log('Данные для API:', dataForApi);
-      await axiosInstance.post('/initiatives', dataForApi);
-
-      // После успешной отправки
-      alert('Данные успешно отправлены');
+      await axiosInstance.post('/initiatives', dataFile);
       navigate('/');
       event.target.reset();
     } catch (error) {
@@ -64,13 +58,13 @@ export default function AddCard() {
           className="mb-3"
         />
         <Form.Control
-          name="file" // Изменено на `file` для соответствия серверу
-          type="file" // Изменено с text на file
-          accept="image/*" // Ограничиваем выбор файлов изображениями
+          name="imagesUrl"
+          type="text"
+          placeholder="Загрузите изображение"
           className="mb-3"
         />
-
-        <Button type="submit" variant="light" className="mb-3">
+      
+        <Button type="submit" variant="light" className="mb-3 center ">
           <Icon.Save />
         </Button>
       </Form>

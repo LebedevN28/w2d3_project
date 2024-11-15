@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import axiosInstance, { setAccessToken } from '../components/api/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 export default function useUser() {
-  const [user, setUser] = useState({ status: 'fetching', data: null });
+ const navigate = useNavigate
+  const [user, setUser] = useState({ status: "logging" });
+console.log(user);
 
   useEffect(() => {
     axiosInstance('/tokens/refresh')
@@ -25,6 +28,20 @@ export default function useUser() {
     setAccessToken('');
   };
 
+  // const signUpHandler = (e) => {
+  //   e.preventDefault();
+  //   const formData = Object.fromEntries(new FormData(e.target));
+  //   if (!formData.email || !formData.password || !formData.name) {
+  //     return alert('Missing required fields');
+  //   }
+  //   axiosInstance
+  //     .post('/account/register', formData)
+  //     .then(({ data }) => {
+  //       setUser({ status: 'logged', data: data.user });
+  //       setAccessToken(data.accessToken);
+  //     })
+  //     .catch((error) => alert(error));
+  // };
   const signUpHandler = (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
@@ -36,6 +53,8 @@ export default function useUser() {
       .post('/account/register', formData)
       .then(({ data }) => {
         setUser({ status: 'logged', data: data.user });
+        setAccessToken(data.accessToken);
+        navigate('/');
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -52,9 +71,10 @@ export default function useUser() {
       .post('/account/login', formData)
       .then(({ data }) => {
         setUser({ status: 'logged', data: data.user });
+        setAccessToken(data.accessToken);
+        navigate('/');
       })
       .catch((error) => {
-        alert('Неправильный адрес электронной почты или пароль');
         console.log(error);
       });
   };
