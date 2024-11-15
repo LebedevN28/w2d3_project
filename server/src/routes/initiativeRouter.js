@@ -70,31 +70,30 @@ initiativeRouter.route('/:initiativeId').get(async (req, res) => {
 });
 
 // Получить все инициативы пользователя и удалить их
-initiativeRouter
-  .route('/userCards/:userId')
-  .get(async (req, res) => {
-    try {
-      const { userId } = req.params;
-      const initiativeOfUser = await Initiative.findAll({ where: { userId } });
+initiativeRouter.route('/userCards/:userId').delete(async (req, res) => {
+  try {
+    const { userId } = req.params;
 
-      if (initiativeOfUser.length === 0) {
-        return res
-          .status(404)
-          .json({ message: 'Инициативы пользователя не найдены' });
-      }
+    const deletedCount = await Initiative.destroy({ where: { userId } });
 
-      res.status(200).json(initiativeOfUser);
-    } catch (error) {
-      console.error('Ошибка получения инициатив пользователя:', error);
-      res.status(500).json({
-        message: 'Ошибка сервера при получении инициатив пользователя',
-      });
+    if (deletedCount === 0) {
+      return res
+        .status(404)
+        .json({ message: 'Инициативы для удаления не найдены' });
     }
 
+    res.sendStatus(204);
+  } catch (error) {
+    console.error('Ошибка удаления инициатив пользователя:', error);
+    res.status(500).json({
+      message: 'Ошибка сервера при удалении инициатив пользователя',
+    });
+  }
+});
+
 initiativeRouter
-.route('/userCards/:userId')
-.get(async (req, res) => {
-  })
+  .route('/userCards/:userId')
+  .get(async (req, res) => {})
   .delete(async (req, res) => {
     try {
       const { userId } = req.params;
