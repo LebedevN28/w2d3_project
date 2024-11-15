@@ -11,7 +11,7 @@ const [addCard, setAddCard] = useState([])
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
     
-        if (!formData.tittle || !formData.description || !formData.imagesUrl || !formData.levelPriority ) {
+        if (!formData.tittle || !formData.description || !formData.imagesUrl) {
           return alert('Заполните все поля!');
         }
         axiosInstance
