@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const accountRouter = require('./routes/accountRouter');
 const tokensRouter = require('./routes/tokensRouter');
 const initiativeRouter = require('./routes/initiativeRouter');
+const path= require('path');
 
 const app = express();
 
