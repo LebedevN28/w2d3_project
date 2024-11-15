@@ -40,7 +40,7 @@ module.exports = {
           count: 91,
           discount: 9,
           levelPriority: 'Муниципальный',
-          userId: 4,
+          userId: 1,
         },
         {
           title: 'Здоровая нация - сильная нация',
@@ -49,7 +49,7 @@ module.exports = {
           count: 75,
           discount: 25,
           levelPriority: 'Федеральный',
-          userId: 5,
+          userId: 2,
         },
         {
           title: 'Больше денег для военных!',
@@ -58,7 +58,7 @@ module.exports = {
           count: 10,
           discount: 90,
           levelPriority: 'Федеральный',
-          userId: 6,
+          userId: 3,
         },
         {
           title: 'Вернем советские ценности!',
@@ -67,7 +67,7 @@ module.exports = {
           count: 15,
           discount: 85,
           levelPriority: 'Региональный',
-          userId: 7,
+          userId: 1,
         },
         {
           title: 'Запретим все иностранные товары!',
@@ -76,7 +76,7 @@ module.exports = {
           count: 3,
           discount: 97,
           levelPriority: 'Региональный',
-          userId: 8,
+          userId: 2,
         },
         {
           title: 'Все должны быть одинаковыми!',
@@ -85,7 +85,7 @@ module.exports = {
           count: 12,
           discount: 88,
           levelPriority: 'Федеральный',
-          userId: 9,
+          userId: 3,
         },
         {
           title: 'Наш город - наш замок',
@@ -94,7 +94,7 @@ module.exports = {
           count: 6,
           discount: 94,
           levelPriority: 'Федеральный',
-          userId: 10,
+          userId: 1,
         },
       ],
       {}
