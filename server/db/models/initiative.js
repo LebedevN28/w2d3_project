@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       count: DataTypes.INTEGER,
       discount: DataTypes.INTEGER,
       levelPriority: DataTypes.STRING,
+    deadline: DataTypes.DATE,
       userId: DataTypes.INTEGER,
     },
     {
