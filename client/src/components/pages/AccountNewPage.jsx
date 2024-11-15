@@ -5,8 +5,8 @@ import Row from 'react-bootstrap/Row';
 import useUser from '../../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 
-export default function AccountNewPage({signUpHandler, user}) {
- 
+export default function AccountNewPage({ signUpHandler }) {
+  // const { signUpHandler } = useUser(); // useContext(UserContext)
   return (
     <Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">
