@@ -34,6 +34,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      deadline: {
+        type: Sequelize.DATE
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {

@@ -31,7 +31,7 @@ export default function MainPage({ user }) {
   };
   const updateHandler = async (id) => {
     try {
-      const res = await axiosInstance.put(`/initiative/${id}`);
+      const res = await axiosInstance.put(`/initiatives/${id}`);
       if (res.status === 200) {
         setcards((prev) => prev.filter((el) => el.id !== id));
       }

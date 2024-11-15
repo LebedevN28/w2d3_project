@@ -1,48 +1,68 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import CardUpdateForm from './CardUpdateForm';
-import { Pencil, Trash, ArrowRight } from 'react-bootstrap-icons';
-import * as Icon from 'react-bootstrap-icons';
+import React from 'react';
+import { Button, Card, Col } from 'react-bootstrap';
+import { Trash } from 'react-bootstrap-icons'; // Используем Trash напрямую
 import { Link } from 'react-router-dom';
-export default function CardCard({ card, user, deleteHandler, updateHandler }) {
-  const [show, setShow] = useState(false);
+
+export default function OneCard({ card, user, deleteHandler }) {
   return (
-    <Col className="d-flex justify-content-center">
+    <Col className="d-flex justify-content-center my-3">
       <Card
+        className="shadow-sm border-0"
         style={{
-          width: '18rem',
-          display: 'flex',
-          flexDirection: 'center',
-          margin: '10px',
+          width: '20rem',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          transition: 'transform 0.2s',
         }}
       >
+        {/* Изображение карточки */}
         <Card.Img
           variant="top"
-          src={`http://localhost:3000/${card.imagesUrl}`}
+          src={card.imagesUrl ? `/img/${card.imagesUrl}` : '/img/default.jpg'}
+          alt={card.title}
+          style={{
+            height: '200px',
+            objectFit: 'cover',
+            filter: 'brightness(95%)',
+          }}
         />
-        <Card.Body>
-          <Card.Title>{card.title}</Card.Title>
-          <Link to={`/initiatives/user/${card.userId}`}>
-            <Card.Text>Автор: {card?.User?.id}</Card.Text>
-          </Link>
-          {
-            <ButtonGroup size="sm">
-              {user?.status === 'logged' && user?.data.id === card.userId && (
-                <>
-                  <Button
-                    onClick={() => deleteHandler(card.id)}
-                    variant="light"
-                  >
-                    <Icon.Trash />
-                  </Button>
-                </>
-              )}
-            </ButtonGroup>
-          }
-          {show && <CardUpdateForm card={card} updateHandler={updateHandler} />}
+
+        {/* Содержимое карточки */}
+        <Card.Body className="p-4">
+          <Card.Title
+            className="mb-2 text-truncate"
+            style={{ fontSize: '1.25rem', fontWeight: '600' }}
+          >
+            {card.title}
+          </Card.Title>
+          <Card.Subtitle
+            className="mb-3 text-muted"
+            style={{ fontSize: '0.9rem' }}
+          >
+            <Link
+              to={`/initiatives/user/${card.userId}`}
+              className="text-decoration-none text-secondary"
+              style={{ fontWeight: '500' }}
+            >
+              Автор: {card?.User?.id || 'Неизвестно'}
+            </Link>
+          </Card.Subtitle>
+          <Card.Text style={{ fontSize: '0.95rem', color: '#555' }}>
+            {card.description}
+          </Card.Text>
+          
+
+          {/* Кнопка удаления (только если пользователь автор) */}
+          {user?.status === 'logged' && user?.data.id === card.userId && (
+            <Button
+              onClick={() => deleteHandler(card.id)}
+              variant="light"
+              title="Удалить"
+            >
+              <Trash />
+            </Button>
+            
+          )}
         </Card.Body>
       </Card>
     </Col>

@@ -21,7 +21,13 @@ export default function CardCard({ card, user, deleteHandler, updateHandler }) {
       >
         <Card.Img
           variant="top"
-          src={`http://localhost:3000/${card.imagesUrl}`}
+          src={card.imagesUrl ? `/img/${card.imagesUrl}` : '/img/default.jpg'}
+          alt={card.title}
+          style={{
+            height: '250px',
+            objectFit: 'cover',
+            filter: 'brightness(95%)',
+          }}
         />
         <Card.Body>
           <Card.Title>{card.title}</Card.Title>
