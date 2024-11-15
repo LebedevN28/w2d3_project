@@ -3,10 +3,10 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import useUser from '../../hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
-export default function AccountNewPage() {
-  
-  const { signUpHandler } = useUser();
+export default function AccountNewPage({signUpHandler, user}) {
+ 
   return (
     <Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">

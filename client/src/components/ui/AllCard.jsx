@@ -21,7 +21,7 @@ export default function CardCard({ card, user, deleteHandler, updateHandler }) {
       >
         <Card.Img
           variant="top"
-          src={`http://localhost:3000/${card.imagesUrl}`}
+          src={`/img/${card.imagesUrl}`}
         />
         <Card.Body>
           <Card.Title>{card.title}</Card.Title>

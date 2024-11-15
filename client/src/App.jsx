@@ -19,16 +19,13 @@ console.log(user.status);
       element: <Layout user={user} logoutHandler={logoutHandler} />,
       errorElement: <h1>No content</h1>,
       children: [
-        {
-          path: '/',
-          element: <MainPage user={user} />,
-        },
-        {
-          element: <ProtectedRouter isAllowed={user.status !== 'logged'} />,
+    
+        { 
+          element: <ProtectedRouter isAllowed={user.status !== 'logged'}  />,
           children: [
             {
               path: '/account/new',
-              element: <AccountNewPage signUpHandler={signUpHandler} />,
+              element: <AccountNewPage signUpHandler={signUpHandler} user={user} />,
             },
             {
               path: '/account/login',
@@ -37,7 +34,7 @@ console.log(user.status);
           ],
         },
         {
-          element: <ProtectedRouter isAllowed={user.status === 'logged'} />,
+          element: <ProtectedRouter isAllowed={user.status === 'logged'}  />,
           children: [
             {
               path: '/newiniative',
@@ -48,6 +45,10 @@ console.log(user.status);
         {
           path: '/initiatives/:initiativeId',
           element: <CardPage />,
+        },
+        {
+          path: '/',
+          element: <MainPage user={user} />,
         },
       ],
     },

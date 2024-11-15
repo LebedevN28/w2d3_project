@@ -5,28 +5,27 @@ import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import axiosInstance from '../api/axiosInstance';
 
+
 export default function AddCard() {
   const navigate = useNavigate();
+
   const addHandler = async (event) => {
     event.preventDefault();
     try {
       const dataFromForm = event.target;
       const newDataFromForm = new FormData(dataFromForm);
       const dataForApi = Object.fromEntries(newDataFromForm);
-      if (
-        !dataForApi.title ||
-        !dataForApi.description ||
-        !dataForApi.imagesUrl
-      ) {
+      console.log(dataForApi);
+
+      if (!dataForApi.title || !dataForApi.description || !dataForApi.file) {
         alert('Не все поля заполнены');
         return;
       }
-      console.log(dataForApi);
 
       const dataFile = new FormData();
       dataFile.append('title', dataForApi.title);
       dataFile.append('description', dataForApi.description);
-      dataFile.append('imagesUrl', dataForApi.imagesUrl);
+      dataFile.append('file', dataForApi.file);
       console.log(dataFile);
 
       await axiosInstance.post('/initiatives', dataFile);
@@ -52,13 +51,12 @@ export default function AddCard() {
           className="mb-3"
         />
         <Form.Control
-          name="imagesUrl"
-          type="text"
+          name="file"
+          type="file"
           placeholder="Загрузите изображение"
           className="mb-3"
         />
-      
-        <Button type="submit" variant="light" className="mb-3 center ">
+        <Button  type="submit" variant="light" className="mb-3 center">
           <Icon.Save />
         </Button>
       </Form>

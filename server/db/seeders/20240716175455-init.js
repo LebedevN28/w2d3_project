@@ -10,7 +10,7 @@ module.exports = {
           firstName: 'John',
           lastName: 'Walsh',
           fatherName: 'Isom',
-          email: 'john@example.com',
+          email: '123@321',
           password: bcrypt.hashSync('123', 10),
           registration: 'Федеральный',
           createdAt: new Date(),

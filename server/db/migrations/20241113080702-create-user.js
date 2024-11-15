@@ -17,7 +17,7 @@ module.exports = {
         // allowNull: false,
       },
       fatherName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       email: {
         type: Sequelize.STRING,

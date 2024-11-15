@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import AllCard from '../ui/AllCard';
+import useUser from '../../hooks/useUser';
 
-export default function MainPage({ user }) {
+export default function MainPage() {
+  const {user} = useUser
   const [cards, setcards] = useState([]);
 
   useEffect(() => {

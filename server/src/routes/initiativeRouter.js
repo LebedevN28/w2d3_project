@@ -1,11 +1,9 @@
-const express = require('express');
+const initiativeRouter = require('express').Router();
+const fs = require('fs/promises');
+const sharp = require('sharp');
 const { Initiative } = require('../../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
 const upload = require('../middlewares/multer');
-const fs = require('fs/promises');
-const sharp = require('sharp');
-
-const initiativeRouter = express.Router();
 
 initiativeRouter
   .route('/')
@@ -18,25 +16,30 @@ initiativeRouter
     }
   })
   .post(verifyAccessToken, upload.single('file'), async (req, res) => {
-    const { title, description, imagesUrl } = req.body;
     try {
+      const { title, description } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: 'Файл не загружен' });
       }
       const name = `${Date.now()}.webp`;
       const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
       await fs.writeFile(`./public/img/${name}`, outputBuffer);
-      const newInit = await Initiative.create({
+
+      const newCraft = await Initiative.create({
         title,
         description,
         imagesUrl: name,
         levelPriority: res.locals.user.registration,
         userId: res.locals.user.id,
       });
-      res.status(201).json(newInit);
+      // если добавление на странице с изделиями
+      // const upCraft = newCraft.get()
+      // upCraft.User = res.locals.user
+
+      res.json(newCraft);
     } catch (error) {
       console.log(error);
-      res.status(500).send(error);
+      res.status(500).json({ message: 'Ошибка сервера' });
     }
   });
 
