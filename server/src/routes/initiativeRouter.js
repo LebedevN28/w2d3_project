@@ -17,7 +17,7 @@ initiativeRouter
 .post(verifyAccessToken, async (req, res) => {
     const { title, description, imagesUrl, count, discount, levelPriority } = req.body;
     try {
-       const newInit = await Initiative.create({ title, description, imagesUrl, count, discount, levelPriority });
+       const newInit = await Initiative.create({ title, description, imagesUrl, count, discount, levelPriority, userId: res.locals.user.id });
        res.status(201).json(newInit)
     } catch (error) { 
         res.status(500).send(error)
@@ -31,6 +31,17 @@ initiativeRouter
     try {
         const initiativeById = await Initiative.findByPk(initiativeId);
         res.status(200).json(initiativeById)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}) // добавить эндпоинт, который добавит голос ЗА инициативе по id
+.post(verifyAccessToken, async (req, res) => {
+    const { initiativeId } = req.params
+    try {
+        const newPoint = await Initiative.findByPk(initiativeId)
+        newPoint.count += 1
+        await newPoint.save()
+        res.status(200).json(newPoint)
     } catch (error) {
         res.status(500).send(error)
     }

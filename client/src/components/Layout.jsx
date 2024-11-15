@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import { Outlet } from 'react-router-dom';
-import Loader from './hoc/Loader';
+import Loader from '../HOCs/Loader';
 import NavBar from './ui/NavBar';
 
 export default function Layout({ user, logoutHandler }) {
