@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Card } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { Link } from 'react-router-dom';
 
 export default function AccountLoginPage({ signInHandler }) {
+
+  const loginUrl = useRef('');
   return (
     <Row>
       <Col md={{ span: 6, offset: 3 }} className="mt-5">
@@ -21,6 +25,7 @@ export default function AccountLoginPage({ signInHandler }) {
           <Button variant="outline-primary" type="submit">
             Войти
           </Button>
+          <Card.Img src="https://hmr.mrgcdn.ru/mail/account/login/cdn/6177d32be39c24a2131aa14794422a76.svg" type="button" to="https://esia.gosuslugi.ru/login/" as={Link} style={{width: "210px", marginLeft: "175px"}}   />
         </Form>
       </Col>
     </Row>

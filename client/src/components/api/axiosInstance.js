@@ -2,15 +2,11 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: '/api',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
 });
 
 let accessToken = '';
 
-export function setAccessToken(newToken) {
+function setAccessToken(newToken) {
   accessToken = newToken;
 }
 
@@ -22,18 +18,20 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (res) => res,
-  async (err) => {
-    const prevRequest = err.config;
-    if (err.response.status === 403 && !prevRequest.sent) {
+  (response) => response,
+  async (error) => {
+    const prevRequest = error.config;
+    if (error.response.status === 403 && !prevRequest.sent) {
+      const response = await axios('/api/tokens/refresh');
+      accessToken = response.data.accessToken;
       prevRequest.sent = true;
-      const { data } = await axios('/api/tokens/refresh');
-      accessToken = data.accessToken;
       prevRequest.headers.Authorization = `Bearer ${accessToken}`;
       return axiosInstance(prevRequest);
     }
-    return Promise.reject(err);
+    return Promise.reject(error);
   }
 );
+
+export { setAccessToken };
 
 export default axiosInstance;

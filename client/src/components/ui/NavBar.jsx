@@ -6,7 +6,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 
 export default function NavBar({ user, logoutHandler }) {
-
   return (
     <Navbar bg="light" data-bs-theme="light">
       <Container>
@@ -14,27 +13,41 @@ export default function NavBar({ user, logoutHandler }) {
           <NavLink to="/" className="nav-link">
             Главная
           </NavLink>
-
         </Nav>
         <Nav>
-          {!user.data && (
+          {user.status !== 'logged' && (
             <>
               <NavLink to="/account/login" className="nav-link">
-              Войти
+                Войти
               </NavLink>
               <NavLink to="/account/new" className="nav-link">
-              Регистрация
+                Регистрация
               </NavLink>
-              <span className="nav-link">|</span>
+              <span className="nav-link">| 
+                {user.status === 'logged' ? user.data.name : ' Гость'}
+              </span>
+              <span className="nav-link"> </span>
             </>
           )}
 
-          <span className="nav-link">
-            {user.data ? user.data.name : 'Гость'}
-          </span>
           {user.data && (
-            <span className="nav-link">
-              <Button onClick={logoutHandler} variant="outline-danger" size="sm">
+            <span className="nav-link" style={{ display: 'flex' }}>
+              <Nav className="me-auto">
+                <NavLink
+                  to={`/initiatives/user/${user.data.id}`}
+                  className="nav-link"
+                >
+                  Мои инициативы
+                </NavLink>
+                <NavLink to="/newiniative" className="nav-link">
+                  Предложить инициативу
+                </NavLink>
+              </Nav>
+              <Button
+                onClick={logoutHandler}
+                variant="outline-danger"
+                size="sm"
+              >
                 Выйти
               </Button>
             </span>

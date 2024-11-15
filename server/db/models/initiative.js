@@ -1,11 +1,9 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Initiative extends Model {
     static associate({ User }) {
-      this.belongsTo(User, { foreignKey: 'userId' })
+      this.belongsTo(User, { foreignKey: 'userId' });
     }
   }
   Initiative.init({
