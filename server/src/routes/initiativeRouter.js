@@ -22,6 +22,7 @@ initiativeRouter
     }
   })
   .post(verifyAccessToken, upload.single('file'), async (req, res) => {
+    const { title, description, imagesUrl, deadline } = req.body;
     try {
       const { title, description } = req.body;
 
@@ -32,13 +33,16 @@ initiativeRouter
       const name = `${Date.now()}.webp`;
       const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
       await fs.writeFile(`./public/img/${name}`, outputBuffer);
-
+      const today = new Date();
+      const futureDate = new Date(today);
+      futureDate.setDate(today.getDate() + 30);
       const newInit = await Initiative.create({
         title,
         description,
         imagesUrl: name,
         levelPriority: res.locals.user.registration,
         userId: res.locals.user.id,
+        deadline: futureDate
       });
 
       res.status(201).json(newInit);
