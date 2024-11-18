@@ -87,7 +87,10 @@ export default function OneCard({ card, user, deleteHandler }) {
               className="text-decoration-none text-secondary"
               style={{ fontWeight: '500' }}
             >
-              Автор: {card?.User?.firstName + ' ' + card?.User?.lastName || 'Неизвестно'}
+              Автор:
+              {user?.data?.firstName && user?.data?.lastName
+                ? `${user.data.firstName} ${user.data.lastName}`
+                : 'Неизвестно'}
             </Link>
           </Card.Subtitle>
           <Card.Text style={{ fontSize: '0.95rem', color: '#555' }}>
@@ -108,7 +111,8 @@ export default function OneCard({ card, user, deleteHandler }) {
                 Голосовать "Против"
               </Button>
               <Card.Text style={{ fontSize: '0.95rem', color: '#555' }}>
-               {(card.count/(card.count + card.discount)) * 100} % Проголосовали "За"
+                {(card.count / (card.count + card.discount)) * 100} %
+                Проголосовали "За"
               </Card.Text>
             </>
           ) : (

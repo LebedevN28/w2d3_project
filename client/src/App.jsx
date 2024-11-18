@@ -52,7 +52,7 @@ function App() {
         },
         {
           path: '/initiatives/user/:userId',
-          element: <AllCardOneUser />,
+          element: <AllCardOneUser user={user} />,
         },
         {
           path: '*',
