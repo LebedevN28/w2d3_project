@@ -7,13 +7,28 @@ import CardUpdateForm from './CardUpdateForm';
 import { Pencil, Trash, ArrowRight } from 'react-bootstrap-icons';
 import * as Icon from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+
 export default function AllCard({ card, user, deleteHandler, updateHandler }) {
   const [show, setShow] = useState(false);
-  console.log('AllCard',{ user, card });
+  console.log('AllCard', { user, card });
+
+  // Стиль для фона карточки
+  const cardStyle = {
+    backgroundColor: '#918981', // Цвет фона карточки
+    color: '#EDEDED', // Цвет текста внутри карточки
+  };
+
+  // Стиль для кнопок и иконок
+  const buttonStyle = {
+    color: '#918981', // Цвет текста для кнопок
+    borderColor: '#918981', // Цвет границы кнопок
+  };
+
   return (
     <Col className="d-flex justify-content-center">
       <Card
         style={{
+          ...cardStyle,
           width: '18rem',
           display: 'flex',
           flexDirection: 'center',
@@ -33,27 +48,32 @@ export default function AllCard({ card, user, deleteHandler, updateHandler }) {
         <Card.Body>
           <Card.Title>{card.title}</Card.Title>
           <Link to={`/initiatives/user/${card.userId}`}>
-            <Card.Text>Автор: {card?.User?.firstName + ' ' + card?.User?.lastName}</Card.Text>
+            <Card.Text>
+              Автор: {card?.User?.firstName + ' ' + card?.User?.lastName}
+            </Card.Text>
           </Link>
-          {
-            <ButtonGroup size="sm">
-              {user?.status === 'logged' && user?.data.id === card.userId && (
-                <>
-                  <Button
-                    onClick={() => deleteHandler(card.id)}
-                    variant="light"
-                  >
-                    <Icon.Trash />
-                  </Button>
-                </>
-              )}
-              <Link to={`/initiatives/${card.id}`}>
-                <Button variant="light">
-                  <Icon.ArrowRight />
+
+          <ButtonGroup size="sm">
+            {user?.status === 'logged' && user?.data.id === card.userId && (
+              <>
+                <Button
+                  onClick={() => deleteHandler(card.id)}
+                  variant="light"
+                  style={buttonStyle} // Применяем цвет к кнопке удаления
+                >
+                  <Icon.Trash />
                 </Button>
-              </Link>
-            </ButtonGroup>
-          }
+              </>
+            )}
+            <Link to={`/initiatives/${card.id}`}>
+              <Button variant="light" style={buttonStyle}>
+                {' '}
+                {/* Применяем цвет к кнопке перехода */}
+                <Icon.ArrowRight />
+              </Button>
+            </Link>
+          </ButtonGroup>
+
           {show && <CardUpdateForm card={card} updateHandler={updateHandler} />}
         </Card.Body>
       </Card>
