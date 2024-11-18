@@ -87,7 +87,7 @@ export default function OneCard({ card, user, deleteHandler }) {
               className="text-decoration-none text-secondary"
               style={{ fontWeight: '500' }}
             >
-              Автор: {card?.User?.id || 'Неизвестно'}
+              Автор: {card?.User?.firstName + ' ' + card?.User?.lastName || 'Неизвестно'}
             </Link>
           </Card.Subtitle>
           <Card.Text style={{ fontSize: '0.95rem', color: '#555' }}>
